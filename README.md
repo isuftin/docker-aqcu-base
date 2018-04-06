@@ -21,8 +21,13 @@ This docker image provides several environment variables to child images:
  - **SPRING_CLOUD_CONFIG_ENABLED** [default: false]: Wherher or not the application should attempt to connect to a Spring Cloud Config Server.
  - **TOMCAT_CERT_PATH** [default: /tomcat-wildcard-ssl.crt]: The path where the tomcat cert file is expected to be mounted.
  - **TOMCAT_KEY_PATH** [default: /tomcat-wildcard-ssl.key]: The path where the tomcat key file is expected to be mounted.
- - **HEALTHY_STATUS** [default: '{"status":"UP"}']: The string to expect to be present in the application health check response in order to indicate that the service is healthy.
- - **HEALTH_CHECK_URL** [default: "https://127.0.0.1:${serverPort}${serverContextPath}/health"]: The URL that Docker should hit to reach the application health check.
+ - **HEALTHY_RESPONSE_CONTAINS** [default: '{"status":"UP"}']: The string to expect to be present in the application health check response in order to indicate that the service is healthy.
+ - **HEALTH_CHECK_ENDPOINT** [default: "health"]: The URL that Docker should hit to reach the application health check.
+
+### Health Check
+This docker image provides a default health check using the environment variables supplied above. The default health check works by pinging the url `https://127.0.0.1:${serverPort}${serverContextPath}${HEALTH_CHECK_ENDPOINT}` and parsing the response, checking for the existence of `HEALTHY_RESPONSE_CONTAINS` within the returned response.
+
+This default health check can be overridden by providing a `HEALTHCHECK` line at the bottom of the child dockerfile.
 
 ### Using Mounted Files
 As mentioned above, the `TOMCAT_CERT_PATH` and `TOMCAT_KEY_PATH` variables should be the paths to two mounted files. These files can be mounted into your container in several ways, two of which are listed below.
