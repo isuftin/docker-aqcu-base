@@ -17,8 +17,8 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 install:
-  - docker build -t aqcu-java-to-r .
+  - docker build -t aqcu-base .
   - docker-compose -f docker-compose-default.yml up -d --build
 
 script:
-  - docker ps | grep -q aqcu-java-to-r
+  - docker ps | grep -q aqcu-base
