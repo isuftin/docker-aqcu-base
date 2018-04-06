@@ -25,6 +25,13 @@ This docker image provides several environment variables to child images:
  - **HEALTH_CHECK_URL** [default: "https://127.0.0.1:${serverPort}${serverContextPath}/health"]: The URL that Docker should hit to reach the application health check.
 
 ### Using Mounted Files
+As mentioned above, the `TOMCAT_CERT_PATH` and `TOMCAT_KEY_PATH` variables should be the paths to two mounted files. These files can be mounted into your container in several ways, two of which are listed below.
+
+#### Docker Secrets
+The `docker-compose-default.yml` file included in this repo illustrates how these files can be mounted into your container using Docker Secrets.
+
+#### Docker Mount Command
+When launching your docker container you can specify files and directories to mount into your container. If you mount a directory to your container containing the cert and key files and it is mounted somewhere other than `/` then you must override the values for `TOMCAT_CERT_PATH` and `TOMCAT_KEY_PATH` to point to the location where the files do get mounted.
 
 ### Extending the Base Image
 This docker image is not intended to be run on its own, rather other images should inherit from this image in order to utilize its functionality. 
