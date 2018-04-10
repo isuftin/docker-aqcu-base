@@ -51,15 +51,16 @@ If you do choose to override the entrypoint but want to call the base entrypoint
 #### Executing your Application
 The entrypoint script added by this docker image expects your application to be launched in one of two pre-defined ways. If you cannot support one of these two methods for some reason then you should override the entrypoint script with your own.
 
-1. **/launch-app.sh**: If you add a shell script to the path `/launch-app.sh` the entrypoint script will execute that script after setting up the keystore. Within this script your can complete any additional configuration that you may need and launch your JAR file or other artifact.
+1. **/launch-app.sh**: If you add a shell script into the docker container at the path `/launch-app.sh` the entrypoint script will execute that script after setting up the keystore. Within this script your can complete any additional configuration that you may need and launch your JAR file or other artifact.
 
-2. **/app.jar**: If you do not provide a `/launch-app.sh` script then the entrypoint will attempt to directly launch an application JAR file that has been placed at `/app.jar`. This jar file is executed using the following command: 
+2. **/app.jar**: If you do not provide a `/launch-app.sh` script then the entrypoint will attempt to directly launch an application JAR file that has been placed at `/app.jar` within the docker container. This jar file is executed using the following command: 
     ```
     java -Djava.security.egd=file:/dev/./urandom -jar -DkeystorePassword=$keystorePassword app.jar $@
     ```
 
-If neither of the above files are provided in your docker image and you do not override the entrypoint script then the following message will appear and the docker container will exit: `No /launch-app.sh or /app.jar found. Exiting.`
+Note that these files will need to be added into your docker container via your child image Dockerfile using something akin to `ADD app.jar /app.jar`, or via another method (such as a CURL in the Dockerfile). Using the base docker image does _not_ automatically add this file into your image for you.
 
+If neither of the above files are provided in your docker image and you do not override the entrypoint script then the following message will appear and the docker container will exit: `No /launch-app.sh or /app.jar found. Exiting.`
 
 #### Overriding Environment Variables
 Any of the environment variables listed above can be overridden in the child docker image by providing a new value for the variable. This value can be provided as an **ENV** value in the Dockerfile itself, as a value in a docker-compose ***.env** file, or via any other method that you might go about assigning a value to an environment variable.
