@@ -19,4 +19,4 @@
         - source: tomcat_ssl_key
           target: /tomcat-wildcard-ssl.key
       env_file:
-        - docker-compose-default.env
+        - docker-compose.env
