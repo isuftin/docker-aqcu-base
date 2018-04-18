@@ -12,6 +12,9 @@ RUN ["chmod", "+x", "pull-from-artifactory.sh"]
 ADD entrypoint.sh entrypoint.sh
 RUN ["chmod", "+x", "entrypoint.sh"]
 
+ADD health-check.sh health-check.sh
+RUN ["chmod", "+x", "health-check.sh"]
+
 ADD launch-app.sh launch-app.sh
 RUN ["chmod", "+x", "launch-app.sh"]
 
@@ -37,4 +40,4 @@ ENV HEALTHY_RESPONSE_CONTAINS='{"status":"UP"}'
 
 ENTRYPOINT [ "/entrypoint.sh"]
 
-HEALTHCHECK CMD curl -k "https://127.0.0.1:${serverPort}${serverContextPath}${HEALTH_CHECK_ENDPOINT}" | grep -q ${HEALTHY_RESPONSE_CONTAINS} || exit 1
+HEALTHCHECK CMD /health-check.sh
