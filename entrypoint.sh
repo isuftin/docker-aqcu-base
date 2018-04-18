@@ -32,7 +32,7 @@ if [ -d "${CERT_IMPORT_DIRECTORY}" ]; then
 fi
 
 if [ -f "/launch-app.sh" ] && [ -x "/launch-app.sh" ]; then
-  /launch-app.sh
+  /launch-app.sh $@
   
   if [ $? -eq 0 ]; then
     exit 0;
