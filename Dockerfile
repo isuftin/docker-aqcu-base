@@ -22,6 +22,7 @@ RUN ["chmod", "+x", "launch-app.sh"]
 ENV requireSsl=true
 ENV serverPort=443
 ENV serverContextPath=/
+ENV maxHeapSpace=300M
 ENV springFrameworkLogLevel=info
 ENV keystoreLocation=/localkeystore.pkcs12
 ENV keystorePassword=changeme
