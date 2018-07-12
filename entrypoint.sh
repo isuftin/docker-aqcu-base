@@ -1,4 +1,14 @@
 #!/bin/sh
+echo " "
+echo "-------------------------------------------------"
+echo "WARNING: The aqcu-base image has been deprecated."
+echo "         Use the wma-spring-boot-base image."
+echo "-------------------------------------------------"
+echo " "
+echo "Continuing in 25 seconds..."
+echo " "
+
+sleep 25s
 
 if [ -f "$keystoreLocation" ]; then
   rm $keystoreLocation
