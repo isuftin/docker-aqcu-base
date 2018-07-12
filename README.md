@@ -1,4 +1,9 @@
-# AQCU Base Docker
+##
+-------------
+## **This image has been deprecated.**
+### Use: https://github.com/USGS-CIDA/docker-wma-spring-boot-base
+-------------
+## (Deprecated) AQCU Base Docker
 
 [![Build Status](https://travis-ci.org/USGS-CIDA/docker-aqcu-base.svg?branch=master)](https://travis-ci.org/USGS-CIDA/docker-aqcu-base)
 
